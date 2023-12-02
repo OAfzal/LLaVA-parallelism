@@ -25,6 +25,7 @@ from typing import Dict, Optional, Sequence, List
 import torch
 
 import transformers
+from transformers import TrainerCallback
 
 from llava.constants import IGNORE_INDEX, IMAGE_TOKEN_INDEX, DEFAULT_IMAGE_TOKEN, DEFAULT_IM_START_TOKEN, DEFAULT_IM_END_TOKEN
 from torch.utils.data import Dataset
@@ -36,7 +37,9 @@ from llava.mm_utils import tokenizer_image_token
 
 from PIL import Image
 
-
+#trainer logger set level to INFO
+# transformers.logging.set_verbosity_info()
+ 
 local_rank = None
 
 
@@ -105,6 +108,7 @@ class TrainingArguments(transformers.TrainingArguments):
     mm_projector_lr: Optional[float] = None
     group_by_modality_length: bool = field(default=False)
 
+            
 
 def maybe_zero_3(param, ignore_status=False, name=None):
     from deepspeed import zero
